@@ -8,6 +8,7 @@ import reactor.core.publisher.Mono;
 
 @RestController
 @RequestMapping("/markets")
+@CrossOrigin(origins = "http://localhost:5173/")
 public class MarketController {
 
     private final MarketService marketService;
