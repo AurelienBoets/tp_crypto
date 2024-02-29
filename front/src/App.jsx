@@ -2,25 +2,20 @@ import React, { useState, useEffect } from "react";
 import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
 
 function App() {
-  const storedEmail = localStorage.getItem("email");
-  const storedPassword = localStorage.getItem("password");
-  const [isLoggedIn, setIsLoggedIn] = useState(
-    !!storedEmail && !!storedPassword
-  );
+  const storedUser = localStorage.getItem("user");
+  const [isLoggedIn, setIsLoggedIn] = useState(!!storedUser);
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    localStorage.removeItem("email");
-    localStorage.removeItem("password");
+    localStorage.removeItem("user");
     setIsLoggedIn(false);
     navigate("/");
   };
 
   useEffect(() => {
-    const storedEmail = localStorage.getItem("email");
-    const storedPassword = localStorage.getItem("password");
-    setIsLoggedIn(!!storedEmail && !!storedPassword);
-  }, [localStorage.getItem("password"), localStorage.getItem("email")]);
+    const storedUser = localStorage.getItem("user");
+    setIsLoggedIn(!!storedUser);
+  }, [localStorage.getItem("user")]);
 
   return (
     <div className="App">
@@ -49,6 +44,11 @@ function App() {
                 <li className="nav-item">
                   <NavLink className="nav-link" to={`/`}>
                     Accueil
+                  </NavLink>
+                </li>
+                <li className="nav-item">
+                  <NavLink className="nav-link" to={`/register`}>
+                    Inscription
                   </NavLink>
                 </li>
               </ul>

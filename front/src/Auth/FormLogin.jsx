@@ -1,21 +1,31 @@
 import { useRef } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { postConnexion } from "./LoginSlice";
 
 const FormLogin = () => {
   const navigate = useNavigate();
 
   const emailRef = useRef();
   const passwordRef = useRef();
+  const dispatch = useDispatch();
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
+    dispatch(postConnexion({ email, password }))
+      .then(() => {
+        navigate("/Wallet");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
 
-    localStorage.setItem("email", email);
-    localStorage.setItem("password", password);
+    // localStorage.setItem("email", email);
+    // localStorage.setItem("password", password);
 
-    navigate("/Wallet");
+    // navigate("/Wallet");
   };
 
   return (

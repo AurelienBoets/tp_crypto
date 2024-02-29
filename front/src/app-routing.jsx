@@ -5,6 +5,7 @@ import ProtectedRoute from "./ProtectedRoute";
 import Market from "./Market/Market";
 import FormLogin from "./Auth/FormLogin";
 import Wallet from "./Wallet/Wallet";
+import FormRegister from "./Auth/FormRegister";
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
       {
         path: "/login",
         element: <FormLogin />,
+      },
+      {
+        path: "/register",
+        element: <FormRegister />,
       },
 
       {

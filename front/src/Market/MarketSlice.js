@@ -68,14 +68,6 @@ const marketSlice = createSlice({
         (market) => market.id !== action.payload
       );
     });
-    //   builder.addCase(updateMarket.fulfilled, (state, action) => {
-    //     const index = state.markets.findIndex(
-    //       (market) => market.id === action.payload.id
-    //     );
-    //     if (index !== -1) {
-    //       state.markets[index] = action.payload;
-    //     }
-    //   });
     builder.addCase(fetchMarketById.fulfilled, (state, action) => {
       state.selectedmarket = action.payload;
     });

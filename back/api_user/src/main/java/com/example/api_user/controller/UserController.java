@@ -9,6 +9,7 @@ import reactor.core.publisher.Mono;
 
 @RestController
 @AllArgsConstructor
+@CrossOrigin(origins = "http://localhost:5173/")
 public class UserController {
 
     private final UserService service;

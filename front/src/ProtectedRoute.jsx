@@ -1,10 +1,11 @@
+import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 
 const ProtectedRoute = (props) => {
   const authCheck = () => {
-    const username = localStorage.getItem("email");
-    const password = localStorage.getItem("password");
-    if (username === "email@gmail.com" && password === "password") {
+    const user = useSelector((state) => state.logins.logins);
+    if (user.length > 0) {
+      console.log(user);
       return true;
     } else {
       return false;
