@@ -1,6 +1,7 @@
 package com.example.api_wallet.service;
 
 import com.example.api_wallet.entity.Transaction;
+import com.example.api_wallet.entity.Wallet;
 import com.example.api_wallet.repository.TransactionRepository;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
@@ -20,19 +21,8 @@ public class TransactionService {
         return transactionRepository.save(transaction);
     }
 
-    public Flux<Transaction> getAllTransactions() {
-        return transactionRepository.findAll();
+    public Flux<Transaction> getTransactionByWallet(Wallet wallet) {
+        return transactionRepository.findByWalletId(wallet.getIdWallet());
     }
 
-    public Flux<Transaction> getTransactionsByWalletId(String walletId) {
-        return transactionRepository.findByWalletId(walletId);
-    }
-
-    public Mono<Transaction> purchase(String walletId, Transaction transaction) {
-        return null;
-    }
-
-    public Mono<Transaction> sell(String walletId, Transaction transaction) {
-       return null;
-    }
 }

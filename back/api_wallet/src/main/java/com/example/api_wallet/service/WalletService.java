@@ -20,19 +20,34 @@ public class WalletService {
         return walletRepository.save(wallet);
     }
 
-    public Flux<Wallet> getAllWallets() {
-        return walletRepository.findAll();
-    }
-
     public Mono<Wallet> getWalletById(String id) {
         return walletRepository.findById(id);
     }
 
-    public Mono<Wallet> purchase(Wallet wallet, Transaction transaction) {
-        return  null;
+    public Flux<Wallet> getWalletByUser(String id) {
+        return walletRepository.findByUserId(id);
     }
 
-    public Mono<Wallet> sell(Wallet wallet, Transaction transaction) {
-       return null;
+
+    public Mono<Wallet> purchase(String walletId, Transaction transaction) {
+        return walletRepository.findById(walletId).flatMap(walletEdit -> {
+            walletEdit.setSold(walletEdit.getSold() + (transaction.getPrice()*transaction.getQuantity()));
+            walletEdit.setQuantity(walletEdit.getQuantity() + transaction.getQuantity());
+            return walletRepository.save(walletEdit).flatMap(walletAddTransaction -> {
+                walletAddTransaction.getTransactions().add(transaction);
+                return walletRepository.save(walletAddTransaction);
+            });
+        });
+    }
+
+    public Mono<Wallet> sell(String walletId, Transaction transaction) {
+        return walletRepository.findById(walletId).flatMap(walletEdit -> {
+            walletEdit.setSold(walletEdit.getSold() - (transaction.getPrice()*transaction.getQuantity()));
+            walletEdit.setQuantity(walletEdit.getQuantity() - transaction.getQuantity());
+            return walletRepository.save(walletEdit).flatMap(walletAddTransaction -> {
+                walletAddTransaction.getTransactions().add(transaction);
+                return walletRepository.save(walletAddTransaction);
+            });
+        });
     }
 }
