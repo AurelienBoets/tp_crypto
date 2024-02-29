@@ -54,11 +54,18 @@ function App() {
               </ul>
               <ul className="navbar-nav ml-auto">
                 {isLoggedIn ? (
-                  <li className="nav-item">
-                    <button className="nav-link btn" onClick={handleLogout}>
-                      Déconnexion
-                    </button>
-                  </li>
+                  <>
+                    <li className="nav-item">
+                      <button className="nav-link btn" onClick={handleLogout}>
+                        Déconnexion
+                      </button>
+                    </li>
+                    <li className="nav-item">
+                      <NavLink className="nav-link" to={`/Wallet`}>
+                        Portefeuille
+                      </NavLink>
+                    </li>
+                  </>
                 ) : (
                   <li className="nav-item">
                     <Link className="nav-link" to="/login">
