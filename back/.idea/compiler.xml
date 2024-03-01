@@ -6,14 +6,16 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="api_wallet" />
+        <module name="api_market" />
+        <module name="api_user" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="api_wallet" target="17" />
-    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="api_market" options="-parameters" />
+      <module name="api_user" options="-parameters" />
       <module name="api_wallet" options="-parameters" />
     </option>
   </component>

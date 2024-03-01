@@ -4,9 +4,11 @@ import axios from "axios";
 const BASE_API_URL = "http://localhost:8083/wallets";
 export const fetchWallets = createAsyncThunk(
   "wallet/fetchUserWallet",
-  async (user) => {
+  async () => {
     try {
-      const response = await axios.get(`${BASE_API_URL}/${user}`);
+      const response = await axios.get(
+        `${BASE_API_URL}/${localStorage.getItem("user")}`
+      );
       return response.data;
     } catch (error) {
       throw error;
